@@ -86,6 +86,18 @@
               </div>
           </div>
       </div>
+            <!-- Header -->
+            <br>
+      <div class="header flex">
+          <div class="left flex">
+              <span>Invoice Base64</span>
+          </div>
+          <div class="right flex">
+              <button @click="renderInvoice" class="render-invoice">Render Invoice</button>
+              <button @click="createInvoice" class="create-invoice">Create Invoice</button>
+              <button @click="downloadInvoice" class="download-invoice">Download Invoice</button>
+          </div>
+      </div>
   </div>
 </template>
 
@@ -95,6 +107,7 @@ import {
     mapMutations,
     mapState
 } from 'vuex';
+import easyinvoice from 'easyinvoice';
 export default {
     name: "invoiceView",
 
@@ -103,6 +116,7 @@ export default {
             currentInvoice: null,
         };
     },
+
     created() {
         this.getCurrentInvoice();
     },
@@ -143,6 +157,84 @@ export default {
         updateStatusToPending(docId) {
             this.UPDATE_STATUS_TO_PENDING(docId);
         },
+        async createInvoice() {
+            const data = this.getData();
+            const result = await easyinvoice.createInvoice(data);
+            this.invoiceBase64 = result.pdf;
+        },
+        async downloadInvoice() {
+            const data = this.getData();
+            const result = await easyinvoice.createInvoice(data);
+            easyinvoice.download('PGS-'+this.currentInvoice.invoiceId+'.pdf', result.pdf);
+        },
+        async renderInvoice(){
+            document.getElementById("pdf").innerHTML = "loading...";
+            const data = this.getData();
+            const result = await easyinvoice.createInvoice(data);
+            easyinvoice.render('pdf', result.pdf);
+        },
+        getData() {
+            return {
+                "currency": "KES", 
+                //Defaults to no currency. List of currency codes: https://www.iban.com/currency-codes
+
+                "taxNotation": "vat", //or gst
+                "marginTop": 25,
+                "marginRight": 25,
+                "marginLeft": 25,
+                "marginBottom": 25,
+                "logo": "https://public.easyinvoice.cloud/img/logo_en_original.png", //or base64
+                        "background": "https://public.easyinvoice.cloud/img/watermark-draft.jpg", //or base64
+                "sender": {
+                "company": "Sample Corp",
+                "address": "Sample Street 123",
+                "zip": "1234 AB",
+                "city": "Sampletown",
+                "country": "Samplecountry"
+                //"custom1": "custom value 1",
+                //"custom2": "custom value 2",
+                //"custom3": "custom value 3"
+                },
+                "client": {
+                "company": "Client Corp",
+                "address": "Clientstreet 456",
+                "zip": "4567 CD",
+                "city": "Clientcity",
+                "country": "Clientcountry"
+                //"custom1": "custom value 1",
+                //"custom2": "custom value 2",
+                //"custom3": "custom value 3"
+                },
+                "invoiceNumber": this.currentInvoice.invoiceId,
+                "invoiceDate": this.currentInvoice.invoiceDate,
+                "products": [
+                    {
+                        "quantity": "2",
+                        "description": "Test1",
+                        "tax": 6,
+                        "price": 33.87
+                    },
+                    {
+                        "quantity": "4",
+                        "description": "Test2",
+                        "tax": 21,
+                        "price": 10.45
+                    }
+                ],
+                "bottomNotice": "Kindly pay your invoice within 15 days.",
+                //Used for translating the headers to your preferred language
+                //Defaults to English. Below example is translated to Dutch
+                // "translate": { 
+                //     "invoiceNumber": "Factuurnummer",
+                //     "invoiceDate": "Factuurdatum",
+                //     "products": "Producten", 
+                //     "quantity": "Aantal", 
+                //     "price": "Prijs",
+                //     "subtotal": "Subtotaal",
+                //     "total": "Totaal" 
+                // }
+            }
+        }
     },
     computed: {
         ...mapState(
@@ -354,6 +446,15 @@ export default {
                 }
             }
         }
+    }
+    .render-invoice {
+        background-color: #5365ee;
+    }
+    .create-invoice {
+        background-color: #537928;
+    }
+    .download-invoice {
+        background-color: #53b5ee;
     }
 }
 </style>

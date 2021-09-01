@@ -1,7 +1,7 @@
 <template>
     <header class="flex">
         <div class="branding flex">
-            <img src="@/assets/file-invoice-dollar-solid.png" alt="">
+            <img src="@/assets/invoice.png" alt="">
         </div>
     </header>
 </template>
@@ -21,13 +21,15 @@ header {
         min-height: 100%;
         min-width: 90px;
         flex-direction: column;
-        border-radius: 0 20px 20px 0;
+        border-radius: 24px 24px 24px 24px;
     }
 
     .branding {
-        border-radius: 0 20px 20px 0;
+        border-radius: 24px 24px 24px 24px;
         background-color: #7c5dfa;
         justify-content: center;
+        margin-left: 10px;
+        margin-top: 10px;
         padding: 24px;
         @media (min-width: 900px) {
             width: 100%;
@@ -35,7 +37,7 @@ header {
 
         img {
             width: auto;
-            height: 30px;
+            height: 50px;
         }
     }
 }
