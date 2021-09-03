@@ -5,6 +5,19 @@
       }">
           <img src="@/assets/icon-arrow-left.svg" alt=""> Go Back
       </router-link>
+      <div class="flex">
+          
+          <div class="right flex" style="flex: 1; justify-content: flex-end; padding: 10px;">
+              <button @click="toggleInvoice" class="create-new-invoice">
+                    <span style="background-color: #fff; border-radius: 50%; padding-end: 8px; margin-right: 10px; padding-top: 3px; padding-bottom: 3px;">
+                    <img style="padding-left: 8px;" src="@/assets/icon-plus.svg" alt="" />
+                    </span>
+                <span>
+                New Invoice
+                </span>
+            </button>
+          </div>
+      </div>
       <!-- Header -->
       <div class="header flex">
           <div class="left flex">
@@ -86,8 +99,8 @@
               </div>
           </div>
       </div>
-            <!-- Header -->
-            <br>
+        <!-- Footer -->
+        <br>
       <div class="header flex">
           <div class="left flex">
               <span>Invoice Base64</span>
@@ -140,6 +153,10 @@ export default {
 
         toggleEditInvoice() {
             this.TOGGLE_EDIT_INVOICE();
+            this.TOGGLE_INVOICE();
+        },
+
+        toggleInvoice() {
             this.TOGGLE_INVOICE();
         },
 
@@ -266,6 +283,8 @@ export default {
             width: 7px;
             height: 10px;
         }
+
+        
     }
 
     .header,
@@ -455,6 +474,17 @@ export default {
     }
     .download-invoice {
         background-color: #53b5ee;
+    }
+    .create-new-invoice {
+        background-color: #7c5dfa;
+        border-radius: 40px;
+        padding: 10px;
+        width: 180px;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        font-size: 14px;
+        flex-direction: row;
     }
 }
 </style>

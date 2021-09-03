@@ -23,7 +23,7 @@
           <div class="inner-button flex">
             <img src="@/assets/icon-plus.svg" alt="" />
           </div>
-          <span class="new">New Invoice</span>
+          <span>New Invoice</span>
         </div>
       </div>
     </div>
@@ -139,6 +139,7 @@ export default {
         .filter-menu {
           width: 120px;
           position: absolute;
+          border-radius: 12px;
           top: 25px;
           list-style: none;
           background-color: #1e2139;
@@ -151,14 +152,11 @@ export default {
 
             &:hover {
               color: #1e2139;
-              background-color: #fff;
+              border-radius: 12px;
+              background-color: #b6a6f5;
             }
           }
         }
-      }
-
-      .new {
-          background-color: #7c5dfa;
       }
 
       .button {

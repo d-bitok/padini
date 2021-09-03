@@ -1,22 +1,27 @@
 <template>
     <div v-if="invoicesLoaded">
         <div v-if="!mobile" class="app flex flex-column">
-        <Navigation />
-            <div class="app-content flex flex-column">
-                <Modal v-if="modalActive" />
-                <transition name='invoice'>
-                    <InvoiceModal v-if="invoiceModal" />
-                </transition>
-                <router-view />
-            </div>
+          <Navigation />
+          <div class="app-content flex flex-column">
+              <Modal v-if="modalActive" />
+              <transition name='invoice'>
+                  <InvoiceModal v-if="invoiceModal" />
+              </transition>
+              <router-view />
+          </div>
         </div>
         <div v-else class="mobile-message flex flex-column">
-            <h2>
-                Sorry, This App is not Supported on a Mobile Platform
-            </h2>
             <p>
-                To Use This App, Please Use a Computer, Tablet or an iPad
+                For Better Performance While Using This App, Please Use a Computer, Tablet or an iPad
             </p>
+            <Navigation />
+          <div class="app-content flex flex-column">
+              <Modal v-if="modalActive" />
+              <transition name='invoice'>
+                  <InvoiceModal v-if="invoiceModal" />
+              </transition>
+              <router-view />
+          </div>
         </div>
     </div>
 </template>

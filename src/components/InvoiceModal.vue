@@ -74,8 +74,12 @@
         <div class="input flex flex-column">
           <label for="paymentTerms">Payment Terms</label>
           <select required type="text" id="paymentTerms" v-model="paymentTerms">
-            <option value="30">Net 30 Days</option>
-            <option value="60">Net 60 Days</option>
+            <option value="5">Due in 5 Days</option>
+            <option value="10">Due in  10 Days</option>
+            <option value="15">Due in  15 Days</option>
+            <option value="20">Due in  20 Days</option>
+            <option value="25">Due in  25 Days</option>
+            <option value="30">Due in  30 Days</option>
           </select>
         </div>
         <div class="input flex flex-column">
@@ -255,7 +259,7 @@ export default {
       const dataBase = db.collection("invoices").doc();
 
       await dataBase.set({
-        invoiceId: uid(6),
+        invoiceId: uid(8),
         billerStreetAddress: this.billerStreetAddress,
         billerCity: this.billerCity,
         billerZipCode: this.billerZipCode,
