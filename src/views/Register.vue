@@ -60,9 +60,9 @@ export default {
 <style lang="scss" scoped>
 .register-wrap {
     position: fixed;
-    top: 0;
-    left: 0;
-    widows: 100%;
+    // top: 0;
+    // left: 0;
+    width: 100%;
     height: 100vh;
     overflow: scroll;
     &::-webkit-scrollbar {
@@ -76,7 +76,9 @@ export default {
         position: relative;
         padding: 56px;
         max-width: 700px;
+        margin: 20px;
         width: 100%;
+        border-radius: 12px;
         background-color: #141625;
         color: #fff;
         box-shadow: 10px 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.06);

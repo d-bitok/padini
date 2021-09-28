@@ -5,6 +5,7 @@ import {
 import { auth } from '../firebase/firebaseAuth'
 import Home from '../views/Home.vue'
 import InvoiceView from '../views/InvoiceView.vue'
+import DownloadInvoice from '../views/DownloadInvoice.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 
@@ -15,7 +16,7 @@ const routes = [
         name: 'Home',
         component: Home,
         meta: {
-            requiresAuth: true,
+            requiresAuth: false,
         },
     },
     {
@@ -32,6 +33,11 @@ const routes = [
         path: "/invoice/:invoiceId",
         name: "Invoice",
         component: InvoiceView,
+    },
+    {
+        path: "/invoice/download/:invoiceId",
+        name: "Download",
+        component: DownloadInvoice,
     },
 ];
 

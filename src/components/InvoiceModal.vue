@@ -9,6 +9,10 @@
       <div class="bill-from flex flex-column">
         <h4>Bill From</h4>
         <div class="input flex flex-column">
+          <label for="invoiceId">Invoice Id</label>
+          <input required type="text" id="invoiceId" v-model="invoiceId" />
+        </div>
+        <div class="input flex flex-column">
           <label for="billerStreetAddress">Street Address</label>
           <input required type="text" id="billerStreetAddress" v-model="billerStreetAddress" />
         </div>
@@ -25,6 +29,10 @@
             <label for="billerCountry">Country</label>
             <input required type="text" id="billerCountry" v-model="billerCountry" />
           </div>
+        </div>
+        <div class="input flex flex-column">
+          <label for="billerPhoneNumber">Phone Number</label>
+          <input required type="text" id="billerPhoneNumber" v-model="billerPhoneNumber" />
         </div>
       </div>
 
@@ -56,6 +64,10 @@
             <label for="clientCountry">Country</label>
             <input required type="text" id="clientCountry" v-model="clientCountry" />
           </div>
+        </div>
+        <div class="input flex flex-column">
+          <label for="clientPhoneNumber">Client's Phone Number</label>
+          <input required type="text" id="clientPhoneNumber" v-model="clientPhoneNumber" />
         </div>
       </div>
 
@@ -131,7 +143,7 @@
 import db from "../firebase/firebaseInit";
 import Loading from "../components/Loading"
 import { mapActions, mapMutations, mapState } from 'vuex'
-import { uid } from 'uid'
+// import { uid } from 'uid'
 export default {
   name: 'invoiceModal',
 
@@ -143,8 +155,10 @@ export default {
       billerStreetAddress: null,
       billerCity: null,
       billerZipCode: null,
-      billerCountry: null,
-      clientName: null,
+      billerCountry: null,      
+      billerPhoneNumber: null,
+      clientName: null,      
+      clientPhoneNumber: null,
       clientEmail: null,
       clientStreetAddress: null,
       clientCity: null,
@@ -180,7 +194,9 @@ export default {
       this.billerCity = currentInvoice.billerCity;
       this.billerZipCode = currentInvoice.billerZipCode;
       this.billerCountry = currentInvoice.billerCountry;
+      this.billerPhoneNumber = currentInvoice.billerPhoneNumber;
       this.clientName = currentInvoice.clientName;
+      this.clientPhoneNumber = currentInvoice.clientPhoneNumber;
       this.clientEmail = currentInvoice.clientEmail;
       this.clientStreetAddress = currentInvoice.clientStreetAddress;
       this.clientCity = currentInvoice.clientCity;
@@ -219,7 +235,7 @@ export default {
 
     addNewInvoiceItem() {
       this.invoiceItemList.push({
-        id: uid(),
+        id: "",
         itemName: "",
         qty: "",
         price: 0,
@@ -259,11 +275,13 @@ export default {
       const dataBase = db.collection("invoices").doc();
 
       await dataBase.set({
-        invoiceId: uid(8),
+        invoiceId: this.invoiceId,
         billerStreetAddress: this.billerStreetAddress,
         billerCity: this.billerCity,
         billerZipCode: this.billerZipCode,
         billerCountry: this.billerCountry,
+        billerPhoneNumber: this.billerPhoneNumber,
+        clientPhoneNumber: this.clientPhoneNumber,
         clientName: this.clientName,
         clientEmail: this.clientEmail,
         clientStreetAddress: this.clientStreetAddress,
@@ -307,7 +325,9 @@ export default {
         billerCity: this.billerCity,
         billerZipCode: this.billerZipCode,
         billerCountry: this.billerCountry,
+        billerPhoneNumber: this.billerPhoneNumber,
         clientName: this.clientName,
+        clientPhoneNumber: this.clientPhoneNumber,
         clientEmail: this.clientEmail,
         clientStreetAddress: this.clientStreetAddress,
         clientCity: this.clientCity,

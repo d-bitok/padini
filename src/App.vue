@@ -1,27 +1,22 @@
 <template>
     <div v-if="invoicesLoaded">
         <div v-if="!mobile" class="app flex flex-column">
-          <Navigation />
-          <div class="app-content flex flex-column">
-              <Modal v-if="modalActive" />
-              <transition name='invoice'>
-                  <InvoiceModal v-if="invoiceModal" />
-              </transition>
-              <router-view />
-          </div>
+            <!-- <Navigation /> -->
+            <div class="app-content flex flex-column">
+                <Modal v-if="modalActive" />
+                <transition name='invoice'>
+                    <InvoiceModal v-if="invoiceModal" />
+                </transition>
+                <router-view />
+            </div>
         </div>
         <div v-else class="mobile-message flex flex-column">
+            <h2>
+                Sorry, This App is Not Supported on a Mobile Platform, Performance Itakua Compromised
+            </h2>
             <p>
-                For Better Performance While Using This App, Please Use a Computer, Tablet or an iPad
+                To Use This App, Please Use a Computer, Tablet or an iPad
             </p>
-            <Navigation />
-          <div class="app-content flex flex-column">
-              <Modal v-if="modalActive" />
-              <transition name='invoice'>
-                  <InvoiceModal v-if="invoiceModal" />
-              </transition>
-              <router-view />
-          </div>
         </div>
     </div>
 </template>
@@ -31,7 +26,7 @@ import {
     mapState,
     mapActions
 } from 'vuex';
-import Navigation from './components/Navigation.vue'
+// import Navigation from './components/Navigation.vue'
 import InvoiceModal from './components/InvoiceModal.vue'
 import Modal from './components/Modal'
 
@@ -42,7 +37,7 @@ export default {
         };
     },
     components: {
-        Navigation,
+        // Navigation,
         InvoiceModal,
         Modal
     },

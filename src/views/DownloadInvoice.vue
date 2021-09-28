@@ -1,47 +1,11 @@
 <template>
-  <div v-if="currentInvoice" class="invoice-view container">
-      <router-link class="nav-link flex" :to="{
-          name: 'Home'
-      }">
-          <img src="@/assets/icon-arrow-left.svg" alt=""> Go Back
-      </router-link>
-      <div class="flex">
-          
-          <div class="right flex" style="flex: 1; justify-content: flex-end; padding: 10px;">
-              <button @click="toggleInvoice" class="create-new-invoice">
-                    <span style="background-color: #fff; border-radius: 50%; padding-end: 8px; margin-right: 10px; padding-top: 3px; padding-bottom: 3px;">
-                    <img style="padding-left: 8px;" src="@/assets/icon-plus.svg" alt="" />
-                    </span>
-                <span>
-                New Invoice
-                </span>
-            </button>
-          </div>
-      </div>
-      <!-- Header -->
-      <div class="header flex">
-          <div class="left flex">
-              <span>Status</span>
-              <div class="status-button flex" :class="{
-                  paid: currentInvoice.invoicePaid,
-                  draft: currentInvoice.invoiceDraft,
-                  pending: currentInvoice.invoicePending,
-              }">
-                  <span v-if="currentInvoice.invoicePaid">Paid</span>
-                  <span v-if="currentInvoice.invoiceDraft">Draft</span>
-                  <span v-if="currentInvoice.invoicePending">Pending</span>
-              </div>
-          </div>
-          <div class="right flex">
-              <button @click="toggleEditInvoice" class="dark-purple">Edit</button>
-              <button @click="deleteInvoice(currentInvoice.docId)" class="red">Delete</button>
-              <button @click="updateStatusToPaid(currentInvoice.docId)" v-if="currentInvoice.invoicePending" class="green">Mark as Paid</button>
-              <button v-if="currentInvoice.invoiceDraft || currentInvoice.invoicePaid" @click="updateStatusToPending(currentInvoice.docId)" class="orange">Mark as Pending</button>
-          </div>
-      </div>
+  <div v-if="currentInvoice" class="invoice-view container" style="margin-top: 2px;">
 
       <!-- Invoice Details -->
       <div class="invoice-details flex flex-column">
+      <div class="left flex flex-column">
+        <h1>Padini General Supplies</h1>
+      </div>
           <div class="top flex">
               <div class="left flex flex-column">
                   <p><span>#</span>{{ currentInvoice.invoiceId }}</p>
@@ -105,14 +69,20 @@
         <br>
       <div class="header flex">
           <div class="left flex">
-              <span>Download Invoice Id : #{{ currentInvoice.invoiceId }} </span>
+              <span>Download Invoice For Printing</span>
           </div>
           <div class="right flex">
-              <router-link class="download-invoice" :to="{ name: 'Download' }">
-                  Download Invoice
-              </router-link>
+              <!-- <button @click="renderInvoice" class="render-invoice">Render Invoice</button> -->
+              <!-- <button @click="createInvoice" class="create-invoice">Create Invoice</button> -->
+              <!-- <button @click="printInvoice" class="download-invoice">Print Invoice</button> -->
+              <button @click="downloadInvoice" class="download-invoice">Download Invoice</button>
           </div>
       </div>
+      <router-link class="nav-link flex" :to="{
+          path: '/invoice/'+currentInvoice.invoiceId
+      }">
+          <img src="@/assets/icon-arrow-left.svg" alt=""> Go Back
+      </router-link>
   </div>
 </template>
 
@@ -176,6 +146,92 @@ export default {
         updateStatusToPending(docId) {
             this.UPDATE_STATUS_TO_PENDING(docId);
         },
+        // async createInvoice() {
+        //     const data = this.getData();
+        //     const result = await easyinvoice.createInvoice(data);
+        //     this.invoiceBase64 = result.pdf;
+        // },
+        // async downloadInvoice() {
+        //     const data = this.getData();
+        //     const result = await easyinvoice.createInvoice(data);
+        //     easyinvoice.download('PGS-'+this.currentInvoice.invoiceId+'.pdf', result.pdf);
+        // },
+        // async renderInvoice(){
+        //     document.getElementById("pdf").innerHTML = "loading...";
+        //     const data = this.getData();
+        //     const result = await easyinvoice.createInvoice(data);
+        //     easyinvoice.render('pdf', result.pdf);
+        // },
+        downloadInvoice(){
+            // document.getElementById("pdf").innerHTML = "loading...";
+            // const data = this.getData();
+            // const result = await easyinvoice.createInvoice(data);
+            // easyinvoice.print('pdf', result.pdf);
+            // window.printPreview('PGS-'+this.currentInvoice.invoiceId+'.pdf');
+            window.print();
+        },
+        // getData() {
+        //     return {
+        //         "currency": "KES", 
+        //         //Defaults to no currency. List of currency codes: https://www.iban.com/currency-codes
+
+        //         "taxNotation": "vat", //or gst
+        //         "marginTop": 25,
+        //         "marginRight": 25,
+        //         "marginLeft": 25,
+        //         "marginBottom": 25,
+        //         "logo": "https://public.easyinvoice.cloud/img/logo_en_original.png", //or base64
+        //                 "background": "https://public.easyinvoice.cloud/img/watermark-draft.jpg", //or base64
+        //         "sender": {
+        //         "company": "Sample Corp",
+        //         "address": "Sample Street 123",
+        //         "zip": "1234 AB",
+        //         "city": "Sampletown",
+        //         "country": "Samplecountry"
+        //         //"custom1": "custom value 1",
+        //         //"custom2": "custom value 2",
+        //         //"custom3": "custom value 3"
+        //         },
+        //         "client": {
+        //         "company": "Client Corp",
+        //         "address": "Clientstreet 456",
+        //         "zip": "4567 CD",
+        //         "city": "Clientcity",
+        //         "country": "Clientcountry"
+        //         //"custom1": "custom value 1",
+        //         //"custom2": "custom value 2",
+        //         //"custom3": "custom value 3"
+        //         },
+        //         "invoiceNumber": this.currentInvoice.invoiceId,
+        //         "invoiceDate": this.currentInvoice.invoiceDate,
+        //         "products": [
+        //             {
+        //                 "quantity": "2",
+        //                 "description": "Test1",
+        //                 "tax": 6,
+        //                 "price": 33.87
+        //             },
+        //             {
+        //                 "quantity": "4",
+        //                 "description": "Test2",
+        //                 "tax": 21,
+        //                 "price": 10.45
+        //             }
+        //         ],
+        //         "bottomNotice": "Kindly pay your invoice within 15 days.",
+        //         //Used for translating the headers to your preferred language
+        //         //Defaults to English. Below example is translated to Dutch
+        //         // "translate": { 
+        //         //     "invoiceNumber": "Factuurnummer",
+        //         //     "invoiceDate": "Factuurdatum",
+        //         //     "products": "Producten", 
+        //         //     "quantity": "Aantal", 
+        //         //     "price": "Prijs",
+        //         //     "subtotal": "Subtotaal",
+        //         //     "total": "Totaal" 
+        //         // }
+        //     }
+        // }
     },
     computed: {
         ...mapState(
@@ -198,9 +254,9 @@ export default {
 <style lang="scss" scoped>
 .invoice-view {
     .nav-link {
-        margin-bottom: 32px;
+        margin-top: 32px;
         align-items: center;
-        color: #fff;
+        color: rgb(255, 248, 248);
         font-size: 12px;
         img {
             margin-right: 16px;
@@ -213,7 +269,7 @@ export default {
 
     .header,
     .invoice-details {
-        background-color: #1e2139; //98a0de
+        background-color: rgb(255, 255, 255); //98a0de
         border-radius: 20px;
     }
 
@@ -226,7 +282,7 @@ export default {
             align-items: center;
 
             span {
-                color: #dfe3fa;
+                color: #000;
                 margin-right: 16px;
             }
         }
@@ -236,7 +292,7 @@ export default {
             justify-content: flex-end;
 
             button {
-                color: #fff;
+                color: #000;
             }
         }
     }
@@ -244,11 +300,11 @@ export default {
     .invoice-details {
         padding: 48px;
         margin-top: 24px;
-        // background-color: #dfe3fa;
+        // background-color: #000;
 
         .top {
             div {
-                color: #dfe3fa;
+                color: #000;
                 flex: 1;
             }
 
@@ -257,7 +313,7 @@ export default {
                 p:first-child {
                     font-size: 24px;
                     text-transform: uppercase;
-                    color: #fff;
+                    color: #000;
                     margin-top: 8px;
                 }
 
@@ -278,7 +334,7 @@ export default {
 
         .middle {
             margin-top: 50px;
-            color: #dfe3fa;
+            color: #000;
             gap: 16px;
 
             h4 {
@@ -332,10 +388,10 @@ export default {
             .billing-items {
                 padding: 32px;
                 border-radius: 20px 20px 0 0 ;
-                background-color: #252945;
+                background-color: #bbbbbb;
 
                 .heading {
-                    color: #dfe3fa;
+                    color: #000;
                     font-size: 12px;
                     margin-bottom: 32px;
 
@@ -353,7 +409,7 @@ export default {
                 .item {
                     margin-bottom: 32px;
                     font-size: 14px;
-                    color: #fff;
+                    color: #000;
 
                     &:last-child{
                         margin-bottom: 0;
@@ -372,9 +428,9 @@ export default {
             }
 
             .total {
-                color: #fff;
+                color: #000;
                 padding: 32px;
-                background-color: rgba(12, 14, 22, 0.7);
+                background-color: rgba(128, 128, 128, 0.7);
                 align-items: center;
                 border-radius: 0 0 20px 20px;
 
@@ -391,22 +447,7 @@ export default {
         }
     }
     .download-invoice {
-        background-color: #1f658e;
-        text-decoration: none;
-        padding: 12px;
-        border-radius: 24px;
-        color: #dfe3fa;
-    }
-    .create-new-invoice {
-        background-color: #7c5dfa;
-        border-radius: 40px;
-        padding: 10px;
-        width: 180px;
-        justify-content: center;
-        align-items: center;
-        color: #fff;
-        font-size: 14px;
-        flex-direction: row;
+        background-color: #53b5ee;
     }
 }
 </style>

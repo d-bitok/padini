@@ -1,5 +1,6 @@
 <template>
   <div class="home container">
+        <!-- <Navigation /> -->
     <!-- Header -->
     <div class="header flex">
       <div class="left flex flex-column">
@@ -40,7 +41,6 @@
 </template>
 
 <script>
-
 import Invoice from '../components/Invoice'
 import { 
   mapMutations,
