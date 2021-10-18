@@ -4,10 +4,10 @@ import {
 } from 'vue-router'
 import { auth } from '../firebase/firebaseAuth'
 import Home from '../views/Home.vue'
-import InvoiceView from '../views/InvoiceView.vue'
-import DownloadInvoice from '../views/DownloadInvoice.vue'
+// import InvoiceView from '../views/InvoiceView.vue'
+// import DownloadInvoice from '../views/DownloadInvoice.vue'
 import Login from '../views/Login.vue'
-import Register from '../views/Register.vue'
+// import Register from '../views/Register.vue'
 
 
 const routes = [
@@ -16,7 +16,7 @@ const routes = [
         name: 'Home',
         component: Home,
         meta: {
-            requiresAuth: false,
+            requiresAuth: true,
         },
     },
     {
@@ -24,21 +24,21 @@ const routes = [
         name: 'Login',
         component: Login,
     },
-    {
-        path: '/register',
-        name: 'Register',
-        component: Register,
-    },
-    {
-        path: "/invoice/:invoiceId",
-        name: "Invoice",
-        component: InvoiceView,
-    },
-    {
-        path: "/invoice/download/:invoiceId",
-        name: "Download",
-        component: DownloadInvoice,
-    },
+    // {
+    //     path: '/register',
+    //     name: 'Register',
+    //     component: Register,
+    // },
+    // {
+    //     path: "/invoice/:invoiceId",
+    //     name: "Invoice",
+    //     component: InvoiceView,
+    // },
+    // {
+    //     path: "/invoice/download/:invoiceId",
+    //     name: "Download",
+    //     component: DownloadInvoice,
+    // },
 ];
 
 

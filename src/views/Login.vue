@@ -5,9 +5,9 @@
             Padini General Supplies
           </h1>
           <h3>
-              Login Page
+              Out Of Service
           </h3>
-          <div class="login-input flex flex-column">
+          <!-- <div class="login-input flex flex-column">
               <div class="input-details flex flex-column">
                 <label for="emailAddress">Email Address</label>
                 <input required class="email-input" type="email" placeholder="example@email.com" v-model="email">
@@ -25,7 +25,7 @@
           </div>
           <button class="login-button" type="submit">
               Login
-          </button>
+          </button> -->
       </form>
   </div>
 </template>

@@ -36,7 +36,7 @@ export default {
         border-top-color: #fff;
         border-bottom-color: #fff;
         border-radius: 50%;
-        animation: spin ease 100ms infinite;
+        animation: spin ease 1000ms infinite;
     }
 }
 </style>
